@@ -1,2 +1,36 @@
 @import "tailwindcss";
+
 @plugin "daisyui";
+
+/* Browse Categories animation */
+.category-section {
+  opacity: 0;
+  transform: translateY(120px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.category-section.category-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Hot Jobs card animation */
+
+.job-card-animation {
+  opacity: 0;
+  transform: translateY(80px) scale(0.97);
+  filter: blur(3px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.8s ease;
+}
+
+.job-card-animation.job-card-show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
