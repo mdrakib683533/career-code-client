@@ -6,12 +6,17 @@ import { jobsCreatedByPromise } from "../../api/jobsApi";
 const MyPostedJobs = () => {
   const { user } = useAuth();
 
+  // NEW
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <h2 className="text-3xl">My Posted Jobs</h2>
       <Suspense>
         <JobLists
-          jobsCreatedByPromise = {jobsCreatedByPromise(user.email)}
+          jobsCreatedByPromise={jobsCreatedByPromise(user.email)}
         ></JobLists>
       </Suspense>
     </div>
