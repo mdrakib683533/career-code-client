@@ -1,5 +1,5 @@
 import React, { use } from "react";
-import { NavLink, Link } from "react-router";
+import { NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import { AiFillSound, AiOutlineMenu } from "react-icons/ai";
 import { FaSignOutAlt } from "react-icons/fa";
@@ -17,6 +17,11 @@ const NavBar = () => {
       });
   };
 
+  // Close mobile dropdown after clicking a navigation link
+  const closeMobileMenu = () => {
+    document.activeElement?.blur();
+  };
+
   const navLinkClass = ({ isActive }) =>
     `relative rounded-lg px-3 py-2 text-sm font-semibold transition-all duration-300 ${
       isActive
@@ -27,7 +32,7 @@ const NavBar = () => {
   const links = (
     <>
       <li>
-        <NavLink to="/" className={navLinkClass}>
+        <NavLink to="/" className={navLinkClass} onClick={closeMobileMenu}>
           Home
         </NavLink>
       </li>
@@ -35,20 +40,32 @@ const NavBar = () => {
       {user && (
         <>
           <li>
-            <NavLink to="/myApplications" className={navLinkClass}>
+            <NavLink
+              to="/myApplications"
+              className={navLinkClass}
+              onClick={closeMobileMenu}
+            >
               My Applications
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/addJob" className={navLinkClass}>
-              <span className="flex items-center gap-2">Add Job</span>
+            <NavLink
+              to="/addJob"
+              className={navLinkClass}
+              onClick={closeMobileMenu}
+            >
+              Add Job
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/myPostedJobs" className={navLinkClass}>
-              <span className="flex items-center gap-2">My Posted Jobs</span>
+            <NavLink
+              to="/myPostedJobs"
+              className={navLinkClass}
+              onClick={closeMobileMenu}
+            >
+              My Posted Jobs
             </NavLink>
           </li>
         </>
@@ -59,13 +76,14 @@ const NavBar = () => {
   return (
     <header className="sticky top-0 z-50 border-b border-base-200 bg-base-100/90 shadow-sm backdrop-blur-xl">
       <div className="navbar mx-auto min-h-16 max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Logo + Mobile Menu */}
+        {/* Left Section */}
         <div className="navbar-start">
-          <div className="dropdown">
+          {/* Mobile Menu - Only below md */}
+          <div className="dropdown md:hidden">
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle lg:hidden"
+              className="btn btn-ghost btn-circle"
             >
               <AiOutlineMenu className="text-xl" />
             </div>
@@ -78,16 +96,15 @@ const NavBar = () => {
             </ul>
           </div>
 
-          {/* Brand Logo */}
-          <Link
-            to="/"
-            className="group flex items-center gap-2 transition-transform duration-300 hover:scale-105"
-          >
+          {/* Brand - md and above */}
+          <div className="ml-2 hidden items-center gap-2 md:flex">
+            {/* Icon */}
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-xl text-primary-content shadow-md">
               <AiFillSound />
             </div>
 
-            <div className="hidden sm:block">
+            {/* Brand Text */}
+            <div>
               <h2 className="text-xl font-extrabold tracking-tight text-base-content">
                 Job<span className="text-primary">Box</span>
               </h2>
@@ -96,12 +113,12 @@ const NavBar = () => {
                 FIND YOUR NEXT OPPORTUNITY
               </p>
             </div>
-          </Link>
+          </div>
         </div>
 
-        {/* Desktop Navigation */}
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal items-center gap-2 px-1">
+        {/* Navigation - md and above */}
+        <div className="navbar-center hidden md:flex">
+          <ul className="menu menu-horizontal items-center gap-1 px-1">
             {links}
           </ul>
         </div>

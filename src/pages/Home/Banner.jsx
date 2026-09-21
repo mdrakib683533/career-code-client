@@ -18,7 +18,7 @@ const Banner = () => {
       <div className="pointer-events-none absolute -left-32 -top-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 sm:px-10 lg:grid-cols-2 lg:gap-8 lg:px-8 lg:py-24">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-10 lg:grid-cols-2 lg:gap-8 lg:px-8 lg:py-24">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -121,7 +121,11 @@ const Banner = () => {
           {/* Floating Job Card */}
           <motion.div
             animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
             className="absolute bottom-24 right-0 z-20 hidden w-56 rounded-2xl border border-base-200 bg-base-100 p-4 shadow-xl sm:block"
           >
             <div className="mb-3 flex items-center gap-3">
@@ -152,7 +156,11 @@ const Banner = () => {
           {/* Floating Top Badge */}
           <motion.div
             animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
             className="absolute left-0 top-24 z-20 rounded-2xl border border-base-200 bg-base-100 px-4 py-3 shadow-lg sm:left-2"
           >
             <p className="text-xs text-base-content/50">Opportunities</p>

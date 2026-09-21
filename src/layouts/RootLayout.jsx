@@ -6,7 +6,7 @@ import Footer from "../pages/Shared/Footer";
 const RootLayout = () => {
   const location = useLocation();
 
-  // Refresh হলে same page-এর top এ থাকবে
+  // refresh in same page
   useEffect(() => {
     window.history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
@@ -16,7 +16,7 @@ const RootLayout = () => {
     };
   }, []);
 
-  // অন্য page এ গেলে top এ যাবে
+  // others page top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.key]);
