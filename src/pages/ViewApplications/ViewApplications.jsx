@@ -11,19 +11,22 @@ const ViewApplications = () => {
     console.log(e.target.value, app_id);
 
     axios
-      .patch(`https://career-code-server-lac.vercel.app/applications/${app_id}`, {
-        status: e.target.value,
-      })
+      .patch(
+        `https://career-code-server-lac.vercel.app/applications/${app_id}`,
+        {
+          status: e.target.value,
+        },
+      )
       .then((res) => {
         console.log(res.data);
-        if(res.data.modifiedCount){
-            Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Application status updated.",
-                        showConfirmButton: false,
-                        timer: 1500,
-                      });
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Application status updated.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       })
       .catch((error) => console.log(error));
