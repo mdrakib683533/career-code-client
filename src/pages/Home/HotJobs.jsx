@@ -5,8 +5,22 @@ const HotJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   const sectionRef = useRef(null);
+
+  const handleShowMoreLess = () => {
+    if (showAll) {
+      setShowAll(false);
+
+      sectionRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      setShowAll(true);
+    }
+  };
 
   useEffect(() => {
     fetch("https://career-code-server-lac.vercel.app/jobs")
@@ -52,7 +66,7 @@ const HotJobs = () => {
     cards.forEach((card) => observer.observe(card));
 
     return () => observer.disconnect();
-  }, [loading, jobs]);
+  }, [loading, jobs, showAll]);
 
   return (
     <section
@@ -107,19 +121,33 @@ const HotJobs = () => {
 
       {/* Jobs Grid */}
       {!loading && !error && jobs.length > 0 && (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {jobs.map((job, index) => (
-            <div
-              key={job._id}
-              className="job-card-animation"
-              style={{
-                transitionDelay: `${index * 100}ms`,
-              }}
-            >
-              <JobCard job={job} />
+        <>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {jobs.slice(0, showAll ? jobs.length : 6).map((job, index) => (
+              <div
+                key={job._id}
+                className="job-card-animation"
+                style={{
+                  transitionDelay: `${index * 100}ms`,
+                }}
+              >
+                <JobCard job={job} />
+              </div>
+            ))}
+          </div>
+
+          {/* Show More / Show Less Button */}
+          {jobs.length > 6 && (
+            <div className="mt-10 text-center">
+              <button
+                onClick={handleShowMoreLess}
+                className="rounded-full bg-primary px-8 py-3 font-semibold text-primary-content shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                {showAll ? "Show Less ↑" : "Show More ↓"}
+              </button>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
     </section>
   );

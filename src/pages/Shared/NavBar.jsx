@@ -1,13 +1,8 @@
 import React, { use } from "react";
 import { NavLink, Link } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { AiFillSound, AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import {
-  FaUserCircle,
-  FaSignOutAlt,
-  FaPlus,
-  FaBriefcase,
-} from "react-icons/fa";
+import { AiFillSound, AiOutlineMenu } from "react-icons/ai";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const NavBar = () => {
   const { user, signOutUser } = use(AuthContext);
@@ -47,19 +42,13 @@ const NavBar = () => {
 
           <li>
             <NavLink to="/addJob" className={navLinkClass}>
-              <span className="flex items-center gap-2">
-                {/* <FaPlus className="text-xs" /> */}
-                Add Job
-              </span>
+              <span className="flex items-center gap-2">Add Job</span>
             </NavLink>
           </li>
 
           <li>
             <NavLink to="/myPostedJobs" className={navLinkClass}>
-              <span className="flex items-center gap-2">
-                {/* <FaBriefcase className="text-xs" /> */}
-                My Posted Jobs
-              </span>
+              <span className="flex items-center gap-2">My Posted Jobs</span>
             </NavLink>
           </li>
         </>
@@ -69,7 +58,7 @@ const NavBar = () => {
 
   return (
     <header className="sticky top-0 z-50 border-b border-base-200 bg-base-100/90 shadow-sm backdrop-blur-xl">
-      <div className="navbar mx-auto min-h-20 max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="navbar mx-auto min-h-16 max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Logo + Mobile Menu */}
         <div className="navbar-start">
           <div className="dropdown">
